@@ -194,12 +194,20 @@ switch Arg.method
 
 
     case 'recu_blink_tmpl'
-        [bad_comp_match, tmp] = ctapeeg_recudetect_blink_ICs(EEG...
+        [bad_comp_match, tmp] = Ala_recudetect_blink_ICs(EEG...
             , rmfield(Arg, 'method'));
         result.method_data = tmp.blinkERP;
         result.scores = table(tmp.thArr...
             , 'RowNames', cellstr(num2str(icacomps'))...
             , 'VariableNames', {'blinkSimilarityRads'});
+        
+     case 'Ala_recu_blink_tmpl'
+        [bad_comp_match, tmp] = ctapeeg_recudetect_blink_ICs(EEG...
+            , rmfield(Arg, 'method'));
+        result.method_data = tmp.blinkERP;
+        result.scores = table(tmp.thArr...
+            , 'RowNames', cellstr(num2str(icacomps'))...
+            , 'VariableNames', {'blinkSimilarityRads'});    
 
 end
 
@@ -270,6 +278,11 @@ function sbf_check_input() % parse the varargin, set defaults
             Arg.thr = 0.5; %threshold value (def=radians)
 
         case 'recu_blink_tmpl'
+            Arg.veog = {'VEOG'};
+            Arg.test_pc = 25;
+            Arg.epoch_len_secs = 0.3;
+            
+         case 'Ala_recu_blink_tmpl'
             Arg.veog = {'VEOG'};
             Arg.test_pc = 25;
             Arg.epoch_len_secs = 0.3;
